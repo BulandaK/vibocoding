@@ -1,3 +1,4 @@
+import { BookingInquiryForm } from "@/components/BookingInquiryForm";
 import {
   PixelBarberPole,
   PixelComb,
@@ -74,6 +75,12 @@ export function BarberLanding() {
               O nas
             </a>
             <a
+              href="#wizyta"
+              className="text-[#f0e6ff]/80 transition hover:text-[#05d9e8]"
+            >
+              Wizyta
+            </a>
+            <a
               href="#kontakt"
               className="text-[#f0e6ff]/80 transition hover:text-[#05d9e8]"
             >
@@ -103,20 +110,22 @@ export function BarberLanding() {
                 </span>
               </h1>
               <p className="mb-8 max-w-xl text-lg text-[#c4b5dc]">
-                Statyczna wizytówka na start — wkrótce rezerwacja wizyt online. Na
-                razie wpadnij, zadzwoń albo napisz. Styl Vice, atmosfera jak z
-                plaży o zachodzie.
+                Wyślij zapytanie o termin z formularza — wiadomość trafi prosto na skrzynkę
+                salonu. Albo wpadnij, zadzwoń. Styl Vice, atmosfera jak z plaży o zachodzie.
               </p>
               <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#wizyta"
+                  className="font-display rounded-sm border-2 border-[#ff2a6d] bg-[#ff2a6d]/15 px-6 py-3 text-sm tracking-wider text-[#ff2a6d] uppercase shadow-[0_0_24px_rgba(255,42,109,0.25)] transition hover:bg-[#ff2a6d]/25"
+                >
+                  Zapytaj o wizytę
+                </a>
                 <a
                   href="#kontakt"
                   className="font-display rounded-sm border-2 border-[#05d9e8] bg-[#05d9e8]/15 px-6 py-3 text-sm tracking-wider text-[#05d9e8] uppercase shadow-[0_0_24px_rgba(5,217,232,0.25)] transition hover:bg-[#05d9e8]/25"
                 >
                   Godziny i adres
                 </a>
-                <span className="font-pixel text-[10px] text-[#ff2a6d]/80">
-                  Rezerwacje — już wkrótce
-                </span>
               </div>
             </div>
             <div className="relative flex flex-col items-center gap-6 md:items-end">
@@ -173,8 +182,8 @@ export function BarberLanding() {
                 pośpiechu — każde cięcie ma swój beat.
               </p>
               <p className="mt-4 text-[#c4b5dc] leading-relaxed">
-                Za chwilę na tej samej stronie pojawi się panel rezerwacji wizyt.
-                Na razie najszybciej: telefon lub Instagram w stopce (placeholder).
+                Zapytanie o wizytę wyślesz z formularza w sekcji kontakt — wiadomość
+                ląduje na skrzynce salonu. Telefon i social też są w grze.
               </p>
             </div>
             <div className="flex justify-center md:justify-end">
@@ -196,35 +205,38 @@ export function BarberLanding() {
             <h2 className="font-display mb-10 text-3xl text-white md:text-4xl">
               Kontakt
             </h2>
-            <div className="grid gap-10 md:grid-cols-2">
-              <div>
-                <p className="font-pixel mb-2 text-[11px] text-[#ff2a6d]">Adres</p>
-                <p className="text-lg text-[#e8dff5]">{address}</p>
-                <p className="font-pixel mb-2 mt-8 text-[11px] text-[#05d9e8]">
-                  Telefon
-                </p>
-                <a
-                  href={`tel:${phone.replace(/\s/g, "")}`}
-                  className="text-xl text-[#05d9e8] underline decoration-[#ff2a6d]/50 underline-offset-4 hover:decoration-[#ff2a6d]"
-                >
-                  {phone}
-                </a>
-              </div>
-              <div>
-                <p className="font-pixel mb-4 text-[11px] text-[#ffd60a]">
-                  Godziny otwarcia
-                </p>
-                <ul className="space-y-3">
-                  {hours.map((h) => (
-                    <li
-                      key={h.day}
-                      className="flex justify-between border-b border-white/10 pb-3 text-[#c4b5dc]"
-                    >
-                      <span>{h.day}</span>
-                      <span className="font-mono text-[#05d9e8]">{h.time}</span>
-                    </li>
-                  ))}
-                </ul>
+            <div className="grid gap-10 lg:grid-cols-2">
+              <BookingInquiryForm />
+              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-1">
+                <div>
+                  <p className="font-pixel mb-2 text-[11px] text-[#ff2a6d]">Adres</p>
+                  <p className="text-lg text-[#e8dff5]">{address}</p>
+                  <p className="font-pixel mb-2 mt-8 text-[11px] text-[#05d9e8]">
+                    Telefon
+                  </p>
+                  <a
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="text-xl text-[#05d9e8] underline decoration-[#ff2a6d]/50 underline-offset-4 hover:decoration-[#ff2a6d]"
+                  >
+                    {phone}
+                  </a>
+                </div>
+                <div>
+                  <p className="font-pixel mb-4 text-[11px] text-[#ffd60a]">
+                    Godziny otwarcia
+                  </p>
+                  <ul className="space-y-3">
+                    {hours.map((h) => (
+                      <li
+                        key={h.day}
+                        className="flex justify-between border-b border-white/10 pb-3 text-[#c4b5dc]"
+                      >
+                        <span>{h.day}</span>
+                        <span className="font-mono text-[#05d9e8]">{h.time}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
