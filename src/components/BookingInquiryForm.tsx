@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 const serviceOptions = [
   { value: "", label: "Dowolna / ustalimy na miejscu" },
@@ -10,43 +10,7 @@ const serviceOptions = [
 ];
 
 export function BookingInquiryForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
-  const [error, setError] = useState<string | null>(null);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setStatus("sending");
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const payload = {
-      name: String(fd.get("name") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      service: String(fd.get("service") ?? ""),
-      preferredSlot: String(fd.get("preferredSlot") ?? ""),
-      message: String(fd.get("message") ?? ""),
-      website: String(fd.get("website") ?? ""),
-    };
-    try {
-      const res = await fetch("/api/booking-inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
-      if (!res.ok) {
-        setError(data.error ?? "Coś poszło nie tak.");
-        setStatus("err");
-        return;
-      }
-      setStatus("ok");
-      form.reset();
-    } catch {
-      setError("Brak połączenia. Spróbuj ponownie.");
-      setStatus("err");
-    }
-  }
+  const [state, handleSubmit] = useForm("mgoprwbo");
 
   return (
     <div
@@ -61,7 +25,7 @@ export function BookingInquiryForm() {
         jak to możliwe.
       </p>
 
-      {status === "ok" ? (
+      {state.succeeded ? (
         <p
           className="font-pixel mt-6 rounded border border-[#00f5a0]/40 bg-[#00f5a0]/10 px-4 py-3 text-[10px] leading-relaxed text-[#7dffc0] sm:text-xs"
           role="status"
@@ -69,7 +33,7 @@ export function BookingInquiryForm() {
           Wysłano! Dzięki — odezwiemy się wkrótce.
         </p>
       ) : (
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <input
             type="text"
             name="website"
@@ -90,6 +54,7 @@ export function BookingInquiryForm() {
                 autoComplete="name"
                 className="mt-1 w-full rounded border border-white/15 bg-[#0a0612] px-3 py-2 text-[#f0e6ff] outline-none ring-[#05d9e8] focus:border-[#05d9e8] focus:ring-1"
               />
+              <ValidationError prefix="Imię" field="name" errors={state.errors} />
             </label>
             <label className="block text-sm">
               <span className="font-pixel text-[10px] text-[#ff2a6d]">E-mail *</span>
@@ -101,6 +66,7 @@ export function BookingInquiryForm() {
                 autoComplete="email"
                 className="mt-1 w-full rounded border border-white/15 bg-[#0a0612] px-3 py-2 text-[#f0e6ff] outline-none ring-[#05d9e8] focus:border-[#05d9e8] focus:ring-1"
               />
+              <ValidationError prefix="Email" field="email" errors={state.errors} />
             </label>
           </div>
 
@@ -114,6 +80,7 @@ export function BookingInquiryForm() {
                 autoComplete="tel"
                 className="mt-1 w-full rounded border border-white/15 bg-[#0a0612] px-3 py-2 text-[#f0e6ff] outline-none ring-[#05d9e8] focus:border-[#05d9e8] focus:ring-1"
               />
+              <ValidationError prefix="Telefon" field="phone" errors={state.errors} />
             </label>
             <label className="block text-sm">
               <span className="font-pixel text-[10px] text-[#05d9e8]">Usługa</span>
@@ -127,6 +94,7 @@ export function BookingInquiryForm() {
                   </option>
                 ))}
               </select>
+              <ValidationError prefix="Usługa" field="service" errors={state.errors} />
             </label>
           </div>
 
@@ -140,6 +108,7 @@ export function BookingInquiryForm() {
               placeholder="np. wtorek po 17, weekend"
               className="mt-1 w-full rounded border border-white/15 bg-[#0a0612] px-3 py-2 text-[#f0e6ff] placeholder:text-[#5c4d78] outline-none ring-[#05d9e8] focus:border-[#05d9e8] focus:ring-1"
             />
+            <ValidationError prefix="Preferowany termin" field="preferredSlot" errors={state.errors} />
           </label>
 
           <label className="block text-sm">
@@ -150,20 +119,15 @@ export function BookingInquiryForm() {
               maxLength={2000}
               className="mt-1 w-full resize-y rounded border border-white/15 bg-[#0a0612] px-3 py-2 text-[#f0e6ff] outline-none ring-[#05d9e8] focus:border-[#05d9e8] focus:ring-1"
             />
+            <ValidationError prefix="Wiadomość" field="message" errors={state.errors} />
           </label>
-
-          {error ? (
-            <p className="text-sm text-[#ff6b9d]" role="alert">
-              {error}
-            </p>
-          ) : null}
 
           <button
             type="submit"
-            disabled={status === "sending"}
+            disabled={state.submitting}
             className="font-display w-full rounded-sm border-2 border-[#ff2a6d] bg-[#ff2a6d]/20 py-3 text-sm tracking-wider text-[#ff2a6d] uppercase transition hover:bg-[#ff2a6d]/30 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-10"
           >
-            {status === "sending" ? "Wysyłanie…" : "Wyślij zapytanie"}
+            {state.submitting ? "Wysyłanie…" : "Wyślij zapytanie"}
           </button>
         </form>
       )}
