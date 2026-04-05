@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --miami-bg: #0a0612;
+  --miami-pink: #ff2a6d;
+  --miami-cyan: #05d9e8;
+  --miami-gold: #ffd60a;
+  --miami-text: #f0e6ff;
+}
+
+@theme inline {
+  --color-background: var(--miami-bg);
+  --color-foreground: var(--miami-text);
+  --font-sans: var(--font-orbitron);
+  --font-mono: var(--font-press-start);
+  --font-display: var(--font-orbitron);
+  --font-pixel: var(--font-press-start);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--miami-bg);
+  color: var(--miami-text);
+  font-family: var(--font-orbitron), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-orbitron), system-ui, sans-serif;
+}
+
+.font-pixel {
+  font-family: var(--font-press-start), monospace;
+  line-height: 1.6;
+}
+
+/* Ostry piksel na SVG */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
