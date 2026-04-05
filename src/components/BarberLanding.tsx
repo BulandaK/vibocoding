@@ -1,4 +1,5 @@
 import { BookingInquiryForm } from "@/components/BookingInquiryForm";
+import { RetroWaveHeroSection } from "@/components/RetroWaveHeroSection";
 import {
   PixelBarberPole,
   PixelComb,
@@ -97,32 +98,32 @@ export function BarberLanding() {
       </header>
 
       <main>
-        <section className="relative z-10 px-6 pb-20 pt-16 md:pt-24">
-          <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-[1fr_auto] md:items-center">
-            <div>
-              <p className="font-pixel mb-4 text-[11px] tracking-widest text-[#05d9e8]">
+        <RetroWaveHeroSection>
+          <div className="grid gap-12 md:grid-cols-[1fr_auto] md:items-center">
+            <div className="drop-shadow-[0_2px_24px_rgba(10,6,18,0.85)]">
+              <p className="font-pixel mb-4 text-[11px] tracking-widest text-[#05d9e8] drop-shadow-[0_0_12px_rgba(5,217,232,0.6)]">
                 Neon · Ocean · Ostrze
               </p>
-              <h1 className="font-display mb-6 text-4xl leading-tight tracking-tight text-white drop-shadow-[0_0_24px_rgba(5,217,232,0.4)] md:text-5xl lg:text-6xl">
+              <h1 className="font-display mb-6 text-4xl leading-tight tracking-tight text-white drop-shadow-[0_0_28px_rgba(5,217,232,0.45)] md:text-5xl lg:text-6xl">
                 Fryzjerstwo
-                <span className="block bg-linear-to-r from-[#ff2a6d] via-[#ffd60a] to-[#05d9e8] bg-clip-text text-transparent">
+                <span className="block bg-linear-to-r from-[#ff2a6d] via-[#ffd60a] to-[#05d9e8] bg-clip-text text-transparent drop-shadow-none">
                   w rytmie Miami
                 </span>
               </h1>
-              <p className="mb-8 max-w-xl text-lg text-[#c4b5dc]">
+              <p className="mb-8 max-w-xl text-lg text-[#e8dff8] text-shadow-hero md:text-[#d8cce8]">
                 Wyślij zapytanie o termin z formularza — wiadomość trafi prosto na skrzynkę
                 salonu. Albo wpadnij, zadzwoń. Styl Vice, atmosfera jak z plaży o zachodzie.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <a
                   href="#wizyta"
-                  className="font-display rounded-sm border-2 border-[#ff2a6d] bg-[#ff2a6d]/15 px-6 py-3 text-sm tracking-wider text-[#ff2a6d] uppercase shadow-[0_0_24px_rgba(255,42,109,0.25)] transition hover:bg-[#ff2a6d]/25"
+                  className="font-display rounded-sm border-2 border-[#ff2a6d] bg-[#ff2a6d]/20 px-6 py-3 text-sm tracking-wider text-[#ffd0dc] uppercase shadow-[0_0_24px_rgba(255,42,109,0.35)] backdrop-blur-sm transition hover:bg-[#ff2a6d]/30"
                 >
                   Zapytaj o wizytę
                 </a>
                 <a
                   href="#kontakt"
-                  className="font-display rounded-sm border-2 border-[#05d9e8] bg-[#05d9e8]/15 px-6 py-3 text-sm tracking-wider text-[#05d9e8] uppercase shadow-[0_0_24px_rgba(5,217,232,0.25)] transition hover:bg-[#05d9e8]/25"
+                  className="font-display rounded-sm border-2 border-[#05d9e8] bg-[#05d9e8]/15 px-6 py-3 text-sm tracking-wider text-[#b8f7ff] uppercase shadow-[0_0_24px_rgba(5,217,232,0.3)] backdrop-blur-sm transition hover:bg-[#05d9e8]/25"
                 >
                   Godziny i adres
                 </a>
@@ -130,7 +131,7 @@ export function BarberLanding() {
             </div>
             <div className="relative flex flex-col items-center gap-6 md:items-end">
               <div className="flex flex-wrap justify-center gap-6 md:justify-end">
-                <div className="rounded border-2 border-[#c77dff]/40 bg-[#1a0a2e]/80 p-4 shadow-[0_0_30px_rgba(199,125,255,0.15)]">
+                <div className="rounded border-2 border-[#c77dff]/50 bg-[#0a0612]/65 p-4 shadow-[0_0_30px_rgba(199,125,255,0.25)] backdrop-blur-sm">
                   <PixelSunset className="h-auto w-48 max-w-full md:w-56" />
                 </div>
               </div>
@@ -141,7 +142,7 @@ export function BarberLanding() {
               </div>
             </div>
           </div>
-        </section>
+        </RetroWaveHeroSection>
 
         <section
           id="uslugi"
